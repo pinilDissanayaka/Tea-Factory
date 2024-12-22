@@ -1,7 +1,7 @@
 from django.urls import path, include
-from .views import TeaLeavesCreate
+from .views import all_records
 
 urlpatterns = [
-    path("", TeaLeavesCreate.as_view(), name="collected_tea_leaves")
+    path("", all_records, name="all_records")
 ]
 
