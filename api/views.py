@@ -1,3 +1,12 @@
-from django.shortcuts import render
+from rest_framework import generics
+from .models import TeaLeaves
+from .serializer import TeaLeavesSerializer
 
-# Create your views here.
+
+
+
+class TeaLeavesCreate(generics.ListCreateAPIView):
+    queryset=TeaLeaves.objects.all()
+    serializer_class=TeaLeavesSerializer
+
+
