@@ -1,8 +1,10 @@
-from django.contrib.auth.models import User
+from rest_framework import serializers
+from .models import TeaLeaves 
 
 
-
-class UserSerializer():
+class TeaLeavesSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
-        fields = ['username', 'email', 'password']
+        model= TeaLeaves
+        fields = ["id", "provider_name", "collected_weight", "any_note" ,"collected_date"]
+
+        
