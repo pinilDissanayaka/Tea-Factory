@@ -59,20 +59,23 @@ def all_records(request):
 
 @api_view(["GET", "DELETE"])
 def single_record(request, user):
+
     """
-    This function is used to retrieve and delete records from the database.
+    A view that handles GET and DELETE requests to retrieve or delete a single record from the database.
 
     Parameters
     ----------
     request : HttpRequest
-        The request object
-    id : str
-        The id of the record to be retrieved or deleted
+        The request object.
+    user : str
+        The provider_name of the record to be retrieved or deleted.
 
     Returns
     -------
     JsonResponse
-        The response object
+        The response object. If the request is GET, it contains the serialized record.
+        If the request is DELETE, it contains a success message.
+        If the record is not found, it contains an error message.
     """
     try:
         # Retrieve the record with the given id from the database
