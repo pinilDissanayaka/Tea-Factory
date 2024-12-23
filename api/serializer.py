@@ -5,6 +5,6 @@ from .models import TeaLeaves
 class TeaLeavesSerializer(serializers.ModelSerializer):
     class Meta:
         model= TeaLeaves
-        fields = ["id", "provider_name", "collected_weight", "any_note" ,"collected_date"]
+        fields = "__all__"
 
         
