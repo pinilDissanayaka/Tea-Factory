@@ -49,11 +49,65 @@ def all_records(request):
             serialized_data.save()
 
             # Return a JsonResponse with the serialized data and a status code of 201 Created
-            return JsonResponse({serialized_data},
+            return JsonResponse(data={serialized_data},
                                 status=status.HTTP_201_CREATED)
         else:
             # Return a JsonResponse with an error status
-            return JsonResponse({"status": "error"})
+            return JsonResponse(data={"status": "error"},
+                                status=status.HTTP_404_NOT_FOUND)
+        
+
+@api_view(["GET", "DELETE"])
+def single_record(request, user):
+    """
+    This function is used to retrieve and delete records from the database.
+
+    Parameters
+    ----------
+    request : HttpRequest
+        The request object
+    id : str
+        The id of the record to be retrieved or deleted
+
+    Returns
+    -------
+    JsonResponse
+        The response object
+    """
+    try:
+        # Retrieve the record with the given id from the database
+        record = TeaLeaves.objects.filter(provider_name=user)
+    except TeaLeaves.DoesNotExist:
+        # Return a JsonResponse with an error status if the record is not found
+        return JsonResponse({"status": "Record Not Found 3"},
+                            status=status.HTTP_404_NOT_FOUND)
+    
+    if request.method=="GET":
+        # Serialize the record
+        serialized_record=TeaLeavesSerializer(record, many=True)
+
+        return JsonResponse(
+                serialized_record.data,
+                safe=False,
+                status=status.HTTP_200_OK
+        )
+    elif request.method == "DELETE":
+        # Delete the record from the database
+        record.delete()
+        # Return a JsonResponse with a status code of 202 Accepted
+        return JsonResponse(
+            data={"Deleted"},
+            status=status.HTTP_202_ACCEPTED,
+            safe=False
+            )
+    else:
+         return JsonResponse(
+            {"status": "Method Not Allowed"},
+            status=status.HTTP_405_METHOD_NOT_ALLOWED
+        )
+
+
+
 
 
 
