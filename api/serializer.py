@@ -12,14 +12,16 @@ class TeaLeavesSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ["id", "username", "password"]
+        fields = ["username", "email", "role", "password"]
 
         extra_kwargs={
             "password":{"write_only": True}
         }
 
-    def create(self, validate_data):
-        new_user=User.objects.create_user(**validate_data)
-        return new_user
+    def create(self, validated_data):
+        user=User.objects.create_user(**validated_data)
+
+        return user
+
 
         

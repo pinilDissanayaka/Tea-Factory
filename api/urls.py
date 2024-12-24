@@ -1,7 +1,9 @@
 from django.urls import path, include
-from .views import ProductAPIViewInfo
+from .views import signin, signup
+
 
 urlpatterns = [
-    path(route='product/info', view=ProductAPIViewInfo.as_view(), name="product info")
+    path(route="signin", view=signin, name="signin"),
+    path(route="signup", view=signup, name="signup"),
 ]
 

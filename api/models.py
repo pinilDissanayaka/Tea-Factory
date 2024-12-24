@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 from uuid import uuid4
 
 
@@ -13,3 +14,10 @@ class TeaLeaves(models.Model):
         return f"{self.provider_name} gives {self.collected_weight} at {self.collected_date}"
     
     
+class User(AbstractUser):
+    ROLE_CHOICES=[
+        ("Collector", "collector"),
+        ("Admin", "admin")
+    ]
+
+    role = models.CharField(max_length="20", choices=ROLE_CHOICES)
