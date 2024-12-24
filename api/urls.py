@@ -1,8 +1,7 @@
 from django.urls import path, include
-from .views import all_records, single_record
+from .views import ProductAPIViewInfo
 
 urlpatterns = [
-    path("records/", all_records, name="all_records"),
-    path("record/<str:user>/", single_record, name="single_record")
+    path(route='product/info', view=ProductAPIViewInfo.as_view(), name="product info")
 ]
 
