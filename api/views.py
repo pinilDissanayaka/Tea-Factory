@@ -1,9 +1,10 @@
 from rest_framework.response import Response
 from django.http import HttpResponse
 from .serializer import TeaLeaveSerializer
+from rest_framework.views import APIView
 from .models import TeaLeaves
-from rest_framework.decorators import api_view
-
+from rest_framework.permissions import IsAuthenticated
+from rest_framework_simplejwt.authentication import JWTAuthentication
 # Create your views here.
 
 
@@ -11,11 +12,12 @@ def index_1(request):
     return HttpResponse("Test API Server")
 
 
-@api_view(["GET"])
-def index(request):
-    user=request.user
+class Home(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
 
-    print(user)
-    return HttpResponse("Test API Server")
+    def get(self, request):
+        pass
+    
 
 
