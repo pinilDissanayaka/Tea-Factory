@@ -8,7 +8,7 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 # Create your views here.
 
 
-def index_1(request):
+def index(request):
     return HttpResponse("Test API Server")
 
 
