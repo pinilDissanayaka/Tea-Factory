@@ -59,7 +59,30 @@ class LoginView(APIView):
 
         if user.exists():
             if user.check_password(password):
-                pass
+                refresh_token=RefreshToken.for_user(user=user)
+                return Response(
+                    {
+                        "message":"User Logging Successfully.",
+                        "access_token": str(refresh_token.access_token),
+                        "refresh_taken": str(refresh_token)
+                    },
+                    status=status.HTTP_200_OK
+                )
+            else:
+                return Response(
+                    {
+                        "message":"Invalid Password"
+                    },
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+        else:
+            return Response(
+                {
+                    "message":"Invalid Username"
+                },
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
 
 
 
