@@ -83,6 +83,17 @@ class LoginView(APIView):
                 status=status.HTTP_400_BAD_REQUEST
             )
 
+class TeaLeavesView(APIView):
+    authentication_classes=[JWTAuthentication]
+    permission_classes=[IsAuthenticated]
+
+
+    def get(self, request):
+        tealeaves_records=TeaLeaves.objects.all()
+
+        
+
+
 
 
 
