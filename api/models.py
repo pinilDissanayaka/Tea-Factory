@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User, AbstractBaseUser, UserManager
+from django.utils import timezone
 
 
 class CustomUserManager(UserManager):
@@ -34,6 +35,17 @@ class CustomUserManager(UserManager):
         return self._create_user(username, email, password, **extra_fields)
 
 
+"""class User(AbstractBaseUser):
+    username = models.CharField(max_length=150, unique=True)
+    route_number=models.CharField(max_length=50)
+    is_staff = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+    date_joined = models.DateTimeField(default=timezone.now)
+
+    objects=CustomUserManager()
+
+    USERNAME_FIELD = "username"
+    REQUIRED_FIELDS = ["route_number"]"""
 
 class TeaLeaves(models.Model):
     quality=models.CharField(max_length=100)
