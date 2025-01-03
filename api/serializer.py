@@ -27,6 +27,9 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         new_user.save()
 
         return new_user
+    
+    def update(self, instance, validate_data):
+        instance.username=validate_data.get('username', instance.username)  
 
 
 
@@ -38,3 +41,16 @@ class TeaLeaveSerializer(serializers.ModelSerializer):
         model=TeaLeaves
         fields="__all__"
 
+
+    def create(self, validated_data):
+        new_tea=TeaLeaves.objects.create(
+            quality=validated_data.get('quality'),
+            quantity=validated_data.get('quantity'),
+            description=validated_data.get('description'),
+            collector_at=validated_data.get('collector_at'),
+            collector_name=validated_data.get('collector_name')
+        )
+
+        new_tea.save()
+
+        return new_tea
