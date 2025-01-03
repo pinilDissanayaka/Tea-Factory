@@ -1,5 +1,12 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AbstractBaseUser
+
+
+
+
+
+
+
 
 class TeaLeaves(models.Model):
     quality=models.CharField(max_length=100)
