@@ -41,7 +41,6 @@ class TeaLeaveSerializer(serializers.ModelSerializer):
         model=TeaLeaves
         fields="__all__"
 
-
     def create(self, validated_data):
         new_tea=TeaLeaves.objects.create(
             quality=validated_data.get('quality'),
@@ -49,6 +48,7 @@ class TeaLeaveSerializer(serializers.ModelSerializer):
             description=validated_data.get('description'),
             collector_at=validated_data.get('collector_at'),
             collector_name=validated_data.get('collector_name')
+            
         )
 
         new_tea.save()
