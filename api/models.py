@@ -4,24 +4,22 @@ from django.utils import timezone
 
 
 class CustomUserManager(UserManager):
-    def _create_user(self, username, email, password, **extra_fields):
+    def _create_user(self, username, password, **extra_fields):
         if not username:
             raise ValueError("The given username must be set")
-        email = self.normalize_email(email)
 
-        username = self.normalize_email(email)
+        username = self.normalize_email(username)
         user = self.model(
             username=username, 
-            email=email, 
             **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_user(self, username, email=None, password=None, **extra_fields):
+    def create_user(self, username, password=None, **extra_fields):
         extra_fields.setdefault("is_staff", False)
         extra_fields.setdefault("is_superuser", False)
-        return self._create_user(username, email, password, **extra_fields)
+        return self._create_user(username, password, **extra_fields)
 
     def create_superuser(self, username, email=None, password=None, **extra_fields):
         extra_fields.setdefault("is_staff", True)
@@ -35,7 +33,7 @@ class CustomUserManager(UserManager):
         return self._create_user(username, email, password, **extra_fields)
 
 
-"""class User(AbstractBaseUser):
+class User(AbstractBaseUser):
     username = models.CharField(max_length=150, unique=True)
     route_number=models.CharField(max_length=50)
     is_staff = models.BooleanField(default=False)
@@ -45,7 +43,7 @@ class CustomUserManager(UserManager):
     objects=CustomUserManager()
 
     USERNAME_FIELD = "username"
-    REQUIRED_FIELDS = ["route_number"]"""
+    REQUIRED_FIELDS = ["route_number"]
 
 class TeaLeaves(models.Model):
     quality=models.CharField(max_length=100)
