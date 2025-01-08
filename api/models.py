@@ -52,3 +52,13 @@ class TeaLeaves(models.Model):
     collector_at=models.DateTimeField(auto_now_add=True)
     collector_name=models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name="collector_name")
 
+class CheckedRoute(models.Model):
+    quality=models.IntegerField()
+    prod=models.IntegerField()
+    reject=models.IntegerField()
+    created_at=models.DateTimeField(auto_now_add=True)
+    updated_at=models.DateTimeField(default=timezone.now)
+
+
+
+
