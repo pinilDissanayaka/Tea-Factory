@@ -46,9 +46,7 @@ class User(AbstractBaseUser):
     REQUIRED_FIELDS = ["route_number"]
 
 class TeaLeaves(models.Model):
-    quality=models.CharField(max_length=100)
-    quantity=models.FloatField(max_length=50)
-    description=models.TextField(max_length=100, blank=True, null=True)
-    collector_at=models.DateTimeField(auto_now_add=True)
-    collector_name=models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name="collector_name")
+    collector_name = models.CharField(max_length=100) 
+    quantity = models.IntegerField 
+    quality = models.CharField(max_length=50, null=True, blank=True) 
 

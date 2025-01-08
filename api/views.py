@@ -84,26 +84,14 @@ class LoginView(APIView):
             )
 
 class TeaLeavesView(APIView):
-    '''authentication_classes=[JWTAuthentication]'''
-    
-    permission_classes=[AllowAny]
+    permission_classes = [AllowAny]
 
-
-    def get(self, request):
-        tealeaves_records=TeaLeaves.objects.all()
-
-        serializer=TeaLeaveSerializer(tealeaves_records, many=True)
-
-        return Response(
-            data=serializer.data,
-            status=status.HTTP_200_OK
-        )
-
-        
-
-
-
-
+    def post(self, request):
+        serializer = TeaLeaveSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)
 
 
 
