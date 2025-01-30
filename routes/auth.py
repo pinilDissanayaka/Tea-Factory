@@ -2,7 +2,7 @@ from fastapi import APIRouter, HTTPException, status, Response
 from fastapi.responses import JSONResponse
 from schema import UserRegistration, UserLogin
 from database import session
-from models import User
+from models import User, Suplier
 from utils import get_hashed_password, verify_password, create_access_token, create_refresh_token
 
 
@@ -15,7 +15,7 @@ router = APIRouter(
 
 @router.post("/register")
 async def register(user:UserRegistration):
-    existing_user = session.query(User).filter_by(username=user.username).first()
+    existing_user = session.query(Suplier).filter_by(username=user.username).first()
     
     if existing_user:
         return HTTPException(
@@ -26,7 +26,7 @@ async def register(user:UserRegistration):
         hashed_password = get_hashed_password(password=user.password)
 
 
-        new_user= User(
+        new_user= Suplier(
             username = user.username,
             password = hashed_password,
             nic = user.nic,
@@ -45,7 +45,7 @@ async def register(user:UserRegistration):
 
 @router.post("/login")
 async def login(user:UserLogin):
-    existing_user = session.query(User).filter_by(username=user.username).first()
+    existing_user = session.query(Suplier).filter_by(username=user.username).first()
 
     if existing_user:
         if verify_password(password=user.password, hashed_pass=existing_user.password):
