@@ -72,8 +72,8 @@ class SupplyData(Base):
     suply_id = Column(Integer, Sequence('suply_tea_suply_id_seq', start=1, increment=1), primary_key=True)
     suplier_id = Column(Integer, ForeignKey('supliers.user_id'))
     leaf_id = Column(Integer, ForeignKey('tea_leaves.leaf_id'))
-    quantity = Column(Integer)
     route_id = Column(Integer, ForeignKey('route.route_id'))
+    quantity = Column(Integer)
     created_at = Column(DateTime, default=datetime.utcnow)
 
     # Relationships

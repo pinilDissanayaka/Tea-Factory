@@ -15,8 +15,7 @@ class UserLogin(BaseModel):
     password : str = Field(max_length=20, min_length=4, description="Password")
 
 
-class AddEquipment(BaseModel):
-    equipment_name : str = Field(description="Name of the equipment")
-    equipment_type : str = Field(description="Type of the equipment")
-    equipment_status : str = Field(description="Status of the equipment")
-    description : str = Field(description="description of the equipment")
+class CollectTea(BaseModel):
+    pass
+
+    
