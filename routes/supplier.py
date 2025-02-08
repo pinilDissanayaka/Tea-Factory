@@ -3,6 +3,7 @@ from fastapi.responses import JSONResponse
 from database import session
 from schema import AddSupplier, DeleteSupplier
 from models import Suplier
+from utils import verify_password
 
 
 router = APIRouter(
@@ -61,13 +62,19 @@ async def delete_supplier(supplier:DeleteSupplier):
     existing_supplier = session.query(Suplier).filter_by(username=supplier.username).first()
     
     if existing_supplier:
-        session.delete(existing_supplier)
-        session.commit()
+        if verify_password(password=supplier.password, hashed_pass=existing_supplier.password):
+            session.delete(existing_supplier)
+            session.commit()
 
-        return Response(
-            content="Supplier Deleted Successfully",
-            status_code=status.HTTP_200_OK
-        )
+            return Response(
+                content="Supplier Deleted Successfully",
+                status_code=status.HTTP_200_OK
+            )
+        else:
+            return HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Given password is incorrect"
+            )
     else:
         return HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
