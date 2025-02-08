@@ -15,6 +15,7 @@ router = APIRouter(
 
 @router.post("/register")
 async def register(user:UserRegistration):
+    
     existing_user = session.query(Suplier).filter_by(username=user.username).first()
     
     if existing_user:

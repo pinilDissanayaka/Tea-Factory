@@ -33,6 +33,15 @@ class TeaLeaf(Base):
     type = Column(String, unique=True, index=True)
     grade = Column(String, unique=True, index=True)
 
+class CheckedRouteQuantity(Base):
+    __tablename__ = 'checked_route_quantity'
+    id = Column(Integer, primary_key=True, index=True)
+    route_id = Column(Integer, ForeignKey('route.route_id'))
+    quantity = Column(Integer)
+
+    # Relationship to Routes
+    route = relationship("Routes", back_populates="checked_routes")
+
 
 class Routes(Base):
     __tablename__ = 'route'
@@ -43,10 +52,6 @@ class Routes(Base):
 
     # Relationship to CheckedRouteQuantity
     checked_routes = relationship("CheckedRouteQuantity", back_populates="route")
-
-
-
-    
 
 class SuplierRole(enum.Enum):
     normal = 'normal'
@@ -74,7 +79,7 @@ class SupplyData(Base):
     leaf_id = Column(Integer, ForeignKey('tea_leaves.leaf_id'))
     route_id = Column(Integer, ForeignKey('route.route_id'))
     quantity = Column(Integer)
-    created_at = Column(DateTime, default=datetime.utcnow)
+    created_at = Column(DateTime, default=datetime.datetime.utcnow)
 
     # Relationships
     suplier = relationship("Suplier", backref=backref("supplies", cascade="all, delete-orphan"))
