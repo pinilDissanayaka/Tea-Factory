@@ -1,8 +1,8 @@
 from fastapi import APIRouter, HTTPException, status, Response
 from fastapi.responses import JSONResponse
-from schema import UserRegistration, UserLogin
+from schema import RouteLogin
 from database import session
-from models import User, Suplier
+from models import User, Routes
 from utils import get_hashed_password, verify_password, create_access_token, create_refresh_token
 
 
@@ -13,48 +13,17 @@ router = APIRouter(
 )
 
 
-@router.post("/register")
-async def register(user:UserRegistration):
-    
-    existing_user = session.query(Suplier).filter_by(username=user.username).first()
-    
-    if existing_user:
-        return HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="User with this user name already exist"
-        )
-    else:
-        hashed_password = get_hashed_password(password=user.password)
-
-
-        new_user= Suplier(
-            username = user.username,
-            password = hashed_password,
-            nic = user.nic,
-            email = user.email,
-            phone = user.phone
-        )
-
-        session.add(new_user)
-
-        session.commit()
-
-        return Response(
-            content="User Creation Successfully",
-            status_code=status.HTTP_201_CREATED
-        )
-
 @router.post("/login")
-async def login(user:UserLogin):
-    existing_user = session.query(Suplier).filter_by(username=user.username).first()
+async def login(route: RouteLogin):
+    existing_route = session.query(Routes).filter_by(route_id=route.route_id).first()
 
-    if existing_user:
-        if verify_password(password=user.password, hashed_pass=existing_user.password):
+    if existing_route:
+        if verify_password(password=existing_route.password, hashed_pass=existing_route.password):
             return JSONResponse(
                 content={
-                    "access_token": create_access_token(subject=existing_user.username),
-                    "refresh_token": create_refresh_token(subject=existing_user.username),
-                    "details": existing_user.to_dict()
+                    "access_token": create_access_token(subject=existing_route.route_id),
+                    "refresh_token": create_refresh_token(subject=existing_route.route_id),
+                    "details": existing_route.to_dict()
                 },
                 status_code=200
             )

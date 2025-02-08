@@ -25,7 +25,6 @@ class User(Base):
             "phone": self.phone
         }
 
-    
 
 class TeaLeaf(Base):
     __tablename__ = 'tea_leaves'
@@ -52,6 +51,15 @@ class Routes(Base):
 
     # Relationship to CheckedRouteQuantity
     checked_routes = relationship("CheckedRouteQuantity", back_populates="route")
+
+
+    def to_dict(self):
+        return {
+            "route_id": self.route_id,
+            "route_name": self.route_name,
+            "distance": self.distance,
+            "password": self.password
+        }
 
 class SuplierRole(enum.Enum):
     normal = 'normal'
