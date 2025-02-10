@@ -8,6 +8,12 @@ class RouteLogin(BaseModel):
     password : str = Field(max_length=20, min_length=4, description="Password")
 
 
+class AddRoute(BaseModel):
+    route_id : int = Field(description="Route ID")
+    route_name : str = Field(max_length=50, description="Route Name")
+    distance : int = Field(description="Distance")
+    password : str = Field(description="Password")
+
 class CollectTea(BaseModel):
     pass
 
