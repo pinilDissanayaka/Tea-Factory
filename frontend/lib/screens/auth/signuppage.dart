@@ -44,17 +44,39 @@ class _SignUpScreenState extends State<SignUpScreen> {
         designationController.text.isNotEmpty &&
         passwordController.text.isNotEmpty &&
         confirmPasswordController.text.isNotEmpty) {
+    
       if (passwordController.text == confirmPasswordController.text) {
-        // Simulating successful registration (Replace with actual backend call)
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('User registered successfully!')),
+        final String api = "http://127.0.0.1:8000/aupplier/add";
+
+        final response = await http.post(
+          Uri.parse(apiUrl),
+          headers: {"Content-Type": "application/json"},
+          body: jsonEncode({
+              "username": fullNameController.text,
+              "first_name": fullNameController.text,
+              "last_name": fullNameController.text,
+              "phone": fullNameController.text,
+              "email": fullNameController.text,
+              "password": passwordController.text,
+              "role": "normal"
+          }),
         );
 
-        // Navigate to login page after successful sign-up
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const LogIn()),
-        );
+        if (response.statusCode == 200) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('User registered successfully!')),
+          );
+
+          // Navigate to login page after successful sign-up
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const LogIn()),
+          );
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Invalid credentials')),
+          );
+        }
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Passwords do not match')),
