@@ -16,9 +16,9 @@ The Karadana Tea Factory Mobile Application is an AI-driven solution designed to
 ## Screenshots
 📸 Below are some screenshots showcasing key features of the app:
 
+![Screenshot_20250209_001332](https://github.com/user-attachments/assets/83f64a0e-0fca-4c7f-bd3e-14ff1ebc9ecb)
 ![Screenshot_20250209_002713](https://github.com/user-attachments/assets/dbc429fb-bc50-455f-a8af-f3c602e7e280)
 ![Screenshot_20250209_002358](https://github.com/user-attachments/assets/9bc6099a-b54d-40fb-a520-87a9e17bbd79)
-![Screenshot_20250209_001332](https://github.com/user-attachments/assets/83f64a0e-0fca-4c7f-bd3e-14ff1ebc9ecb)
 ![Screenshot_20250209_002700](https://github.com/user-attachments/assets/28de384b-3122-4430-b902-c71530f7c968)
 ![Screenshot_20250209_001436](https://github.com/user-attachments/assets/466b0b4d-b077-48fa-8a4f-0dcf90dfadff)
 ![Screenshot_20250209_001453](https://github.com/user-attachments/assets/d4c41d72-ef4b-45bf-bd99-ab7089e54018)
@@ -26,11 +26,11 @@ The Karadana Tea Factory Mobile Application is an AI-driven solution designed to
 ![Screenshot_20250209_001715](https://github.com/user-attachments/assets/47b9cb6c-8685-436a-ae93-73e2d9604f3c)
 
 ## Technology Stack
-Frontend :	Flutter
-Backend :	FastAPI
-Database :	PostgreSQL
-AI & ML : TensorFlow, Scikit-learn
-Cloud & Security : AWS, Role-Based Access Control (RBAC), Data Encryption
+- Frontend :	Flutter
+- Backend :	FastAPI
+- Database :	PostgreSQL
+- AI & ML : TensorFlow, Scikit-learn
+- Cloud & Security : AWS, Role-Based Access Control (RBAC), Data Encryption
 
 ## Project Goals
 - Enhance Transparency – Digital records improve trust in supplier transactions.
