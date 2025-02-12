@@ -69,7 +69,7 @@ python main.py
 
 ### Frontend Setup
 ```
-cd Karadana-Tea-App/frontend
+cd Tea-Factory/frontend
 
 flutter pub get
 
