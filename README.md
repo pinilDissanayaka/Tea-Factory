@@ -48,7 +48,8 @@ Ensure you have the following installed:
 2. Python (>=3.8)
 3. FastAPI
 4. PostgreSQL
-5. TensorFlow & Scikit-learn
+5. TensorFlow
+6. Scikit-learn
 
 ### Backend Setup
 ```
